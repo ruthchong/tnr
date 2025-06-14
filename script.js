@@ -193,3 +193,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const aboutText = document.querySelector('.about-text');
+    
+    // 创建观察器
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 当元素进入视口时添加动画类
+                entry.target.classList.add('animate');
+                // 可选: 动画完成后停止观察
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1 // 当10%的元素可见时触发
+    });
+    
+    // 开始观察元素
+    if (aboutText) {
+        observer.observe(aboutText);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 关于我们部分的动画
+    const aboutText = document.querySelector('.about-text');
+    // 联系我们部分的动画
+    const contactInfo = document.querySelector('.contact-info');
+    
+    // 创建观察器
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    // 开始观察元素
+    if (aboutText) observer.observe(aboutText);
+    if (contactInfo) observer.observe(contactInfo);
+});
